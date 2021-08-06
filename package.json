@@ -1,5 +1,5 @@
 {
-  "name": "exec-js",
+  "name": "js-exec",
   "version": "1.0.0",
   "description": "Programmatically execute JS strings, safely",
   "main": "dist/index.js",
@@ -18,13 +18,14 @@
   },
   "keywords": [
     "js",
-    "exec-js",
+    "js-exec",
+    "exec",
     "eval",
     "string",
     "as",
     "js"
   ],
-  "author": "Parsa Safavi (parsasi)",
+  "author": "Parsa Safavi (@parsasi)",
   "license": "MIT",
   "dependencies": {}
 }

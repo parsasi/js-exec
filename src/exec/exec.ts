@@ -1,4 +1,5 @@
 import { Source, Sandbox, Exec } from '../types'
+import { runInterceptors } from '../interceptor'
 
 function has(target, key) {
     return true
@@ -9,9 +10,10 @@ function get(target, key) {
     return target[key]
 }
 
-const exec: Exec = (src: Source): Sandbox => {
+const exec: Exec = ({source , interceptors}): Sandbox => {
+    const interceptedSource = runInterceptors({source : source, interceptors : interceptors})
     const proxiesCache = new WeakMap()
-    const sourceWithSand: Source = 'with (sandbox) {' + src + '}'
+    const sourceWithSand: Source = `with (sandbox) { ${interceptedSource} }`
     const executableCode = new Function('sandbox', sourceWithSand)
 
     return function (sandbox) {
@@ -23,3 +25,4 @@ const exec: Exec = (src: Source): Sandbox => {
     }
 }
 
+export { exec }
