@@ -10,8 +10,8 @@ function get(target, key) {
     return target[key]
 }
 
-const exec: Exec = ({source , interceptors}): Sandbox => {
-    const interceptedSource = runInterceptors({source : source, interceptors : interceptors})
+const exec: Exec = (source , options): Sandbox => {
+    const interceptedSource = runInterceptors({source : source, interceptors : options?.interceptors})
     const proxiesCache = new WeakMap()
     const sourceWithSand: Source = `with (sandbox) { ${interceptedSource} }`
     const executableCode = new Function('sandbox', sourceWithSand)
