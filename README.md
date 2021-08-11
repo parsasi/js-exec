@@ -20,7 +20,8 @@ Executing an inputted string, as JS code can be **Extremely** risky. These risks
 - [Installation](#installation)
 - [Usage](#usage)
 - [Interceptors](#interceptors)
-- [Contributors](#contributors)
+- [Contributing](#Contributing)
+- [Code of Conduct](#Contributing)
 - [LICENSE](#license)
 
 ## Features
@@ -30,9 +31,16 @@ Executing an inputted string, as JS code can be **Extremely** risky. These risks
 - **Lint** - Preconfigured _ESlint_ with _Airbnb_ config
 - **Interceptors** - pass in interceptors to the sandbox, to manipulate the source, before being executed
 
-# Commands
+## Installation
 
-- `npm run clean` - Remove `lib/` directory
+This module is distributed via [npm](https://www.npmjs.com/) which should be installed as one of your project's `dependencies`:
+
+```
+npm i --save js-exec
+```
+
+## Usage
+
 - `npm test` - Run tests with linting and coverage results.
 - `npm test:only` - Run tests without linting or coverage.
 - `npm test:watch` - You can even re-run tests on file changes!
