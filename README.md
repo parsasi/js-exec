@@ -19,8 +19,9 @@ Executing an inputted string, as JS code can be **Extremely** risky. These risks
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Interceptors](#interceptors)
-- [Contributing](#Contributing)
+  - [Basic](#usage)
+  - [Interceptors](#interceptors)
+- [Contributing](#contributing)
 - [Code of Conduct](#Contributing)
 - [LICENSE](#license)
 
@@ -41,24 +42,66 @@ npm i --save js-exec
 
 ## Usage
 
+### Basic
+
 - [Install `js-exec`](#installation)
 - Import `exec` from the package
+- Pass the source to `exec`.
+- Use the sandbox returned to pass dependencies to the code.
 
 ```ts
-import { exec } from "../exec";
+import { exec } from "js-exec";
 
 const source = `console.log("Hello from js-exec 👋");`;
 
-const runCode = exec({
-  source,
-});
-runCode({ console });
+const sandbox = exec(source);
+
+sandbox();
+// Error: Cannot read property 'log' of undefined
+
+sandbox({ console });
+// Hello from js-exec 👋
 ```
 
-# Installation
+### Interceptors
 
-Just clone this repo and remove `.git` folder.
+Interceptors will help you run functions on the code, before it gets executed.
+
+Each Interceptor receives a `source: string` and returns a transformed `source: string`.
+
+```ts
+import { exec, Source } from "js-exec";
+
+const source = `console.log("There are some f***s here!");`;
+
+//Removes bad words inside the source
+const removeBadWords = (source: Source): Source => {
+  let cleanSource = source;
+  const badWordsArray = ["f***"];
+  const textToReplace = "🚫BAD WORD🚫";
+  badWordsArray.forEach(
+    (word) => (cleanSource = cleanSource.replace(word, textToReplace))
+  );
+  return cleanSource;
+};
+
+//Interceptors are run sequentially
+const interceptors = [removeBadWords];
+
+//interceptors are passed into the options object
+const runCode = exec(source, { interceptors });
+runCode({ console });
+// There are some 🚫BAD WORD🚫s here!
+```
+
+## Contributing
+
+This package is a beginner-friendly package. If you don't know where to start, visit [Make a Pull Request](https://makeapullrequest.com/) to learn how to make pull requests.
+
+Please visit [Contributing](CONTRIBUTING.md) for more info.
+
+---
 
 # License
 
-MIT © Dinesh Pandiyan
+MIT
