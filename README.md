@@ -22,7 +22,7 @@ Executing an inputted string, as JS code can be **Extremely** risky. These risks
   - [Basic](#usage)
   - [Interceptors](#interceptors)
 - [Contributing](#contributing)
-- [Code of Conduct](#Contributing)
+- [Code of Conduct](#code-of-conduct)
 - [LICENSE](#license)
 
 ## Features
@@ -99,6 +99,10 @@ runCode({ console });
 This package is a beginner-friendly package. If you don't know where to start, visit [Make a Pull Request](https://makeapullrequest.com/) to learn how to make pull requests.
 
 Please visit [Contributing](CONTRIBUTING.md) for more info.
+
+## Code of Conduct
+
+Please visit [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ---
 
