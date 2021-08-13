@@ -23,11 +23,11 @@ series [How to Contribute to an Open Source Project on GitHub](https://app.egghe
 
 ## Dependencies
 
-We are planning to keep this package _without dependencies_. If there is a need for dependency. If you need a dependency, if possible, create it as a interceptor, and publish it as its own package.
+We are planning to keep this package _without dependencies_. If you need a dependency, if possible, create it as a interceptor, and publish it as its own package.
 
 ## Help needed
 
-Please checkout the [the open issues][https://github.com/parsasi/js-exec/issues]
+Please [open issues](https://github.com/parsasi/js-exec/issues), if you encounter any issues.
 
 Also, please watch the repo and respond to questions/bug reports/feature
 requests! Thanks!

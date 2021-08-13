@@ -17,6 +17,7 @@ Executing an inputted string, as JS code can be **Extremely** risky. These risks
 `js-exec` will sandbox the JavaScript code (passed as a string). It will only give it access to the objects that are given to the sandbox. This way, you will have full control of what the code can or cannot access.
 
 - [Features](#features)
+- [Executing TypeScript](#execute-typescript)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Basic](#usage)
@@ -27,10 +28,14 @@ Executing an inputted string, as JS code can be **Extremely** risky. These risks
 
 ## Features
 
-- **0 Dependencies** - no dependencies whatsoever
+- **No Dependencies** - no dependencies
 - **TypeScript** - Everything is TypeScript based
 - **Lint** - Preconfigured _ESlint_ with _Airbnb_ config
 - **Interceptors** - pass in interceptors to the sandbox, to manipulate the source, before being executed
+
+## Execute TypeScript
+
+We are adding a TypeScript [interceptors](#interceptors), very soon. Please stay tuned for exciting news.
 
 ## Installation
 
