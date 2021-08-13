@@ -1,7 +1,7 @@
 {
   "name": "js-exec",
-  "version": "1.1.0",
-  "description": "Programmatically execute JS strings, safely",
+  "version": "1.1.2",
+  "description": "Execute JavaScript strings, in a Sandbox",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -27,5 +27,9 @@
   ],
   "author": "Parsa Safavi (@parsasi)",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parsasi/js-exec"
+},  
 }
