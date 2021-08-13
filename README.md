@@ -1,39 +1,116 @@
-# TO BE UPDATED
+<div align="center">
+<h1>js-exec 🧰</h1>
 
-## NPM Module Boilerplate
+<p> Execute sandboxed JavaScript strings.  </p>
+</div>
 
-[![Build Status](https://travis-ci.org/flexdinesh/npm-module-boilerplate.svg?branch=master)](https://travis-ci.org/flexdinesh/npm-module-boilerplate) [![dependencies Status](https://david-dm.org/flexdinesh/npm-module-boilerplate/status.svg)](https://david-dm.org/flexdinesh/npm-module-boilerplate) [![devDependencies Status](https://david-dm.org/flexdinesh/npm-module-boilerplate/dev-status.svg)](https://david-dm.org/flexdinesh/npm-module-boilerplate?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+---
 
-**Start developing your NPM module in seconds** ✨
+[![dependencies Status](https://david-dm.org/flexdinesh/npm-module-boilerplate/status.svg)](https://david-dm.org/parsasi/js-exec) [![devDependencies Status](https://status.david-dm.org/gh/parsasi/js-exec.svg?type=dev)](https://david-dm.org/parsasi/js-exec?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Readymade boilerplate setup with all the best practices to kick start your npm/node module development.
+## The problem
 
-Happy hacking =)
+Executing an inputted string, as JS code can be **Extremely** risky. These risks can be reduced, when using `new Function` syntax; however, this can also be limiting, as it would only give you access to the global scope.
 
-# Features
+## This solution ✨
 
-* **ES6/ESNext** - Write _ES6_ code and _Babel_ will transpile it to ES5 for backwards compatibility
-* **Test** - _Mocha_ with _Istanbul_ coverage
-* **Lint** - Preconfigured _ESlint_ with _Airbnb_ config
-* **CI** - _TravisCI_ configuration setup
-* **Minify** - Built code will be minified for performance
+`js-exec` will sandbox the JavaScript code (passed as a string). It will only give it access to the objects that are given to the sandbox. This way, you will have full control of what the code can or cannot access.
 
-# Commands
-- `npm run clean` - Remove `lib/` directory
-- `npm test` - Run tests with linting and coverage results.
-- `npm test:only` - Run tests without linting or coverage.
-- `npm test:watch` - You can even re-run tests on file changes!
-- `npm test:prod` - Run tests with minified code.
-- `npm run test:examples` - Test written examples on pure JS for better understanding module usage.
-- `npm run lint` - Run ESlint with airbnb-config
-- `npm run cover` - Get coverage report for your code.
-- `npm run build` - Babel will transpile ES6 => ES5 and minify the code.
-- `npm run prepublish` - Hook for npm. Do all the checks before publishing your module.
+- [Features](#features)
+- [Executing TypeScript](#execute-typescript)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Basic](#usage)
+  - [Interceptors](#interceptors)
+- [Contributing](#contributing)
+- [Code of Conduct](#code-of-conduct)
+- [LICENSE](#license)
 
-# Installation
-Just clone this repo and remove `.git` folder.
+## Features
 
+- **No Dependencies** - no dependencies
+- **TypeScript** - Everything is TypeScript based
+- **Lint** - Preconfigured _ESlint_ with _Airbnb_ config
+- **Interceptors** - pass in interceptors to the sandbox, to manipulate the source, before being executed
+
+## Execute TypeScript
+
+We are adding a TypeScript [interceptors](#interceptors), very soon. Please stay tuned for exciting news.
+
+## Installation
+
+This module is distributed via [npm](https://www.npmjs.com/) which should be installed as one of your project's `dependencies`:
+
+```
+npm i --save js-exec
+```
+
+## Usage
+
+### Basic
+
+- [Install `js-exec`](#installation)
+- Import `exec` from the package
+- Pass the source to `exec`.
+- Use the sandbox returned to pass dependencies to the code.
+
+```ts
+import { exec } from "js-exec";
+
+const source = `console.log("Hello from js-exec 👋");`;
+
+const sandbox = exec(source);
+
+sandbox();
+// Error: Cannot read property 'log' of undefined
+
+sandbox({ console });
+// Hello from js-exec 👋
+```
+
+### Interceptors
+
+Interceptors will help you run functions on the code, before it gets executed.
+
+Each Interceptor receives a `source: string` and returns a transformed `source: string`.
+
+```ts
+import { exec, Source } from "js-exec";
+
+const source = `console.log("There are some f***s here!");`;
+
+//Removes bad words inside the source
+const removeBadWords = (source: Source): Source => {
+  let cleanSource = source;
+  const badWordsArray = ["f***"];
+  const textToReplace = "🚫BAD WORD🚫";
+  badWordsArray.forEach(
+    (word) => (cleanSource = cleanSource.replace(word, textToReplace))
+  );
+  return cleanSource;
+};
+
+//Interceptors are run sequentially
+const interceptors = [removeBadWords];
+
+//interceptors are passed into the options object
+const runCode = exec(source, { interceptors });
+runCode({ console });
+// There are some 🚫BAD WORD🚫s here!
+```
+
+## Contributing
+
+This package is a beginner-friendly package. If you don't know where to start, visit [Make a Pull Request](https://makeapullrequest.com/) to learn how to make pull requests.
+
+Please visit [Contributing](CONTRIBUTING.md) for more info.
+
+## Code of Conduct
+
+Please visit [Code of Conduct](CODE_OF_CONDUCT.md).
+
+---
 
 # License
 
-MIT © Dinesh Pandiyan
+MIT
