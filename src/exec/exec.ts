@@ -21,7 +21,18 @@ const exec: Exec = (source , options): Sandbox => {
             const sandboxProxy = new Proxy(sandbox, { has, get })
             proxiesCache.set(sandbox, sandboxProxy)
         }
-        return executableCode(proxiesCache.get(sandbox))
+        try{
+            executableCode(proxiesCache.get(sandbox))
+            if(options?.onSuccess){
+                return options.onSuccess();
+            }
+        }
+        catch(e){
+            if(options?.onError){
+                return options.onError(e);
+            }
+            throw new Error(e)
+        }
     }
 }
 
