@@ -1,6 +1,6 @@
 {
   "name": "js-exec",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Execute JavaScript strings, in a Sandbox",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
