@@ -1,1 +1,0 @@
-export { getConfigCallbackNames } from "./getConfigCallbackNames";
