@@ -1,6 +1,5 @@
 import { Source, Sandbox, Exec } from "../types";
 import { runInterceptors } from "../interceptor";
-import { getConfigCallbackNames } from "../configCallback";
 
 function has(target, key) {
   return true;
@@ -17,21 +16,12 @@ const exec: Exec = (source, options): Sandbox => {
     interceptors: options?.interceptors,
   });
 
-  const {
-    parameterText: configCallbackParamsName,
-    callbackNames: configCallbackNames,
-  } = getConfigCallbackNames(options?.configCallbacks);
-  const configCallbacks = options?.configCallbacks ?? [];
+  const globalValues = options?.globalValues ?? {};
 
   const proxiesCache = new WeakMap();
-  const sourceWithSand: Source = `with (sandbox ${
-    configCallbackParamsName ? `, ${configCallbackParamsName}` : ""
-  }) { ${interceptedSource} }`;
-  const executableCode = new Function(
-    "sandbox",
-    ...configCallbackNames,
-    sourceWithSand
-  );
+  const sourceWithSand: Source = `with (sandbox) { ${interceptedSource} }`;
+
+  const executableCode = new Function("sandbox", sourceWithSand);
 
   return function (sandbox) {
     if (!proxiesCache.has(sandbox)) {
@@ -39,7 +29,7 @@ const exec: Exec = (source, options): Sandbox => {
       proxiesCache.set(sandbox, sandboxProxy);
     }
     try {
-      executableCode(proxiesCache.get(sandbox), ...configCallbacks);
+      executableCode({ ...globalValues, ...proxiesCache.get(sandbox) });
       if (options?.onSuccess) {
         return options.onSuccess();
       }
