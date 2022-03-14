@@ -1,12 +1,19 @@
 export type Source = string;
-export type Sandbox = (sandbox: Record<string | number | symbol, any>) => any;
-export type Interceptor = (source: Source) => Source
-export type Interceptors = Array<Interceptor>
+export type SandboxValues = Record<string | number | symbol, any>;
+export type Sandbox = (sandbox: SandboxValues) => any;
+
+export type Interceptor = (source: Source) => Source;
+export type Interceptors = Array<Interceptor>;
+
+export type GlobalValues = SandboxValues;
+
 export type OnSuccessHandler = () => void;
-export type OnErrorHandler = (e : Error) => void;
+export type OnErrorHandler = (e: Error) => void;
+
 interface ExecOptions {
-    interceptors?: Interceptors;
-    onSuccess?:  OnSuccessHandler;
-    onError? : OnErrorHandler;
+  interceptors?: Interceptors;
+  globalValues?: GlobalValues;
+  onSuccess?: OnSuccessHandler;
+  onError?: OnErrorHandler;
 }
-export type Exec = (source : Source , execOptions?: ExecOptions) => Sandbox;
+export type Exec = (source: Source, execOptions?: ExecOptions) => Sandbox;

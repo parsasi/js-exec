@@ -80,7 +80,7 @@ import { exec } from "js-exec";
 
 const source = `console.log("Hello from js-exec 👋");`;
 
-const sandbox = exec(source, {
+const sandbox = exec(code, {
   onSuccess: () => console.log("Taadaa 🎉🎉"),
   onError: (e: Error) => console.log("Something occurred 🥺\n", e),
 });
