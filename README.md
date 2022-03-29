@@ -6,7 +6,7 @@
 
 ---
 
-[![dependencies Status](https://david-dm.org/flexdinesh/npm-module-boilerplate/status.svg)](https://david-dm.org/parsasi/js-exec) [![devDependencies Status](https://status.david-dm.org/gh/parsasi/js-exec.svg?type=dev)](https://david-dm.org/parsasi/js-exec?type=dev) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Downloads Per Month](https://img.shields.io/npm/dm/js-exec)](https://www.npmjs.com/package/js-exec) [![Top Language](https://img.shields.io/github/languages/top/parsasi/js-exec)](https://github.com/parsasi/js-exec/) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)[![NPM Maintenance](https://img.shields.io/npms-io/maintenance-score/js-exec)](https://www.npmjs.com/package/js-exec)
 
 ## The problem
 
