@@ -23,6 +23,7 @@ Executing an inputted string, as JS code can be **Extremely** risky. These risks
   - [Basic](#usage)
   - [Callbacks](#callbacks)
   - [Interceptors](#interceptors)
+  - [Global Values](#global-values)
 - [Contributing](#contributing)
 - [Code of Conduct](#code-of-conduct)
 - [LICENSE](#license)
@@ -123,6 +124,20 @@ const interceptors = [removeBadWords];
 const runCode = exec(source, { interceptors });
 runCode({ console });
 // There are some 🚫BAD WORD🚫s here!
+```
+### Global Values
+
+You can also make values available, on all executions of the sandbox; If, you wish to re-use them.
+
+
+
+```ts
+const pi = 3.141592;
+
+const globalValues = { pi }
+
+//pi will be available on every execution of runCode
+const runCode = exec(source, { globalValues });
 ```
 
 ## Contributing
