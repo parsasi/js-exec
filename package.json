@@ -9,7 +9,8 @@
   ],
   "scripts": {
     "dev": "tsc -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pub" : "tsc & npm version patch & npm publish"
   },
   "devDependencies": {
     "eslint": "7.31.0",
