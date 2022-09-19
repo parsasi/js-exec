@@ -24,12 +24,13 @@ const exec: Exec = (source, options): Sandbox => {
   const executableCode = new Function("sandbox", sourceWithSand);
 
   return function (sandbox) {
-    if (!proxiesCache.has(sandbox)) {
-      const sandboxProxy = new Proxy(sandbox, { has, get });
-      proxiesCache.set(sandbox, sandboxProxy);
+    const sandboxWithGlobals = {...sandbox , ...globalValues};
+    if (!proxiesCache.has(sandboxWithGlobals)) {
+      const sandboxProxy = new Proxy(sandboxWithGlobals, { has, get });
+      proxiesCache.set(sandboxWithGlobals, sandboxProxy);
     }
     try {
-      executableCode({ ...globalValues, ...proxiesCache.get(sandbox) });
+      executableCode(proxiesCache.get(sandboxWithGlobals));
       if (options?.onSuccess) {
         return options.onSuccess();
       }
